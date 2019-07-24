@@ -1,5 +1,4 @@
 Oracle Cloud Infrastructure (using internal load balancer)
-
 ===
 
 About this guide
