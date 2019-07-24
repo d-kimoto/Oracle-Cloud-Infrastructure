@@ -1,20 +1,15 @@
-Oracle Cloud Infrastructure (using internal load barancer)
+Oracle Cloud Infrastructure (using internal load balancer)
 
 ===
 
-Introduction
+About this guide
 ---
-This guide describes how to setup EXPRESSCLUSTER of the mirror disk type cluster on Oracle Cloud Infrastructure.
-Below explaining cluster configuration using private load barancer
-For the detailed information of EXPRESSCLUSTER X, please refer to this site.()
+This guide describes how to setup EXPRESSCLUSTER of the mirror disk type cluster on Oracle Cloud Infrastructure.  
+The following describes the cluster configuration using a internal load balancer.  
+For the detailed information of EXPRESSCLUSTER X, please refer to this site.()  
 
-以下ではプライベートロードバランサを用いたクラスタ構成について説明します。
-
-
-
-
-System configuration
-Overview
+configuration
+### Overview
 本構成では、2node構成のミラーディスク型クラスタ(以下 Node1 / Node2) を構築し、障害発生時には
 Block Storage上に設定したデータパーティション上のデータを、他ノードに引き継ぎます。
 また、クラスタの現用系と待機系は、Oracle Cloud が提供するロードバランサーにおけるプローブを利用して切り替えます。
@@ -22,27 +17,28 @@ Block Storage上に設定したデータパーティション上のデータを�
 プライベートIPアドレスは、他のインスタンスとの通信が可能となり、データ転送用経路として使用します。
 
 
-### Software version
+### Software versions
 - In the case of Linux
   - Cent OS 6.10 (2.6.32-754.14.2.el6.x86_64)
     or
     Cent OS 7.6 (3.10.0-957.12.2.el7.x86_64)
-  - CLUSTERPRO X 4.1 for Linux (internal version：4.1.1-1)
+  - EXPRESSCLUSTER X 4.1 for Linux (internal version：4.1.1-1)
 - in the case of Windows
   - Windows Server 2016 Standard
-  - CLUSTERPRO X 4.1 for Windows (Internal version：12.11)
+  - EXPRESSCLUSTER X 4.1 for Windows (internal version：12.11)
 
 
 ### Cluster configuration
-- ネットワークパーティション解決リソース
-  - PING ネットワークパーティション解決リソース
+- network partition resolution resource
+  - network partition resolution resource by PING method
 - Group resources
-  - ミラーディスクリソース
-  - Azure プローブポートリソース
+  - mirror disk resource
+  - Azure probe port resource
 - Monitor resources
-  - ミラーディスク監視リソース
-  - Azure プローブポート監視リソース
-  - Azure ロードバランス監視リソース
+  - mirror connect monitor resource
+  - mirror disk monitor resource
+  - Azure probe probe port monitor resource
+  - Azure load balance monitor resource
 
 Oracle Cloud setup
 ---
