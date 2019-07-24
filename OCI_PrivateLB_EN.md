@@ -81,8 +81,6 @@ Oracle Cloud setup
 
 Setup EXPRESSCLUSTER X
 ---
-※記載がない値は既定値を設定している
-
 Other parameters than below, default value is setting.
 
 1. Setting the partition for mirror disk
