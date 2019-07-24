@@ -10,12 +10,11 @@ For the detailed information of EXPRESSCLUSTER X, please refer to this site.()
 Configuration
 ---
 ### Overview
-本構成では、2node構成のミラーディスク型クラスタ(以下 Node1 / Node2) を構築し、障害発生時には  
-Block Storage上に設定したデータパーティション上のデータを、他ノードに引き継ぎます。  
-また、クラスタの現用系と待機系は、Oracle Cloud が提供するロードバランサーにおけるプローブを利用して切り替えます。  
-クライアントアプリケーションは、パブリックIPアドレスを指定することで、仮想クラウド・ネットワーク(VCN)内のインスタンスにアクセスすることが可能となります。  
-プライベートIPアドレスは、他のインスタンスとの通信が可能となり、データ転送用経路として使用します。  
-
+In the configuration of this guide, create 2-server(Node1 Node2 as below) cluster of mirror disk type.
+If a failure has occurred, the data on block storage is taken over to the other server.
+And active and standby servers of the cluster are swiched by controlling the Oracle Cloud Infrastructure load balancer from EXPRESSCLUSTER.
+Client Applications can use public IP address to access instance in the virtual cloud network.
+if your environment use private IP address, it becomes possible to communicate from Node1 to Node2 and this network use data transfer.
 
 ### Software versions
 - In the case of Linux
@@ -28,13 +27,13 @@ Block Storage上に設定したデータパーティション上のデータを�
   - EXPRESSCLUSTER X 4.1 for Windows (internal version：12.11)
 
 
-### Cluster configuration
+### Cluster configurations
 - network partition resolution resource
   - network partition resolution resource by PING method
 - Group resources
   - mirror disk resource
   - Azure probe port resource
-- Monitor resources
+- Monitor resource
   - mirror connect monitor resource
   - mirror disk monitor resource
   - Azure probe probe port monitor resource
@@ -142,7 +141,7 @@ Check the operation for EXPRESSCLUSTER X
 ---
 1. Please look up how to check the operation X in the URL below.
 
-★ もしかしてAzure向けのURLない？
+★ もしかしてAzure向けのURL(EN)ない？
 
 参考
 ---
