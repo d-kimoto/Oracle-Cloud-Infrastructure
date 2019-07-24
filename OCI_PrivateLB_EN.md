@@ -8,7 +8,8 @@ This guide describes how to setup EXPRESSCLUSTER of the mirror disk type cluster
 The following describes the cluster configuration using a internal load balancer.  
 For the detailed information of EXPRESSCLUSTER X, please refer to this site.()  
 
-configuration
+Configuration
+---
 ### Overview
 本構成では、2node構成のミラーディスク型クラスタ(以下 Node1 / Node2) を構築し、障害発生時には
 Block Storage上に設定したデータパーティション上のデータを、他ノードに引き継ぎます。
