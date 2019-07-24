@@ -26,7 +26,6 @@ if your environment use private IP address, it becomes possible to communicate f
   - Windows Server 2016 Standard
   - EXPRESSCLUSTER X 4.1 for Windows (internal version：12.11)
 
-
 ### Cluster configurations
 - network partition resolution resource
   - network partition resolution resource by PING method
@@ -36,7 +35,7 @@ if your environment use private IP address, it becomes possible to communicate f
 - Monitor resource
   - mirror connect monitor resource
   - mirror disk monitor resource
-  - Azure probe probe port monitor resource
+  - Azure probe port monitor resource
   - Azure load balance monitor resource
 
 Oracle Cloud setup
@@ -84,58 +83,60 @@ Setup EXPRESSCLUSTER X
 ---
 ※記載がない値は既定値を設定している
 
-1. ミラーディスク用のパーティションを作成
-   - Linuxの場合
-     - /dev/oracleoci/oraclevdb1：RAW
-     - /dev/oracleoci/oraclevdb2：ext4でフォーマット
-   - Windowsの場合
-     - D:\ ：ファイルシステム未作成
-     - E:\ ：NTFSでフォーマット
-1. CLUSTERPRO をインストールし、ライセンスを登録する
-1. Cluster WebUIを起動し、設定モードからクラスタ生成ウィザードを実行する
-1. 基本設定、インタコネクトを設定する
-   - インタコネクト1
+Other parameters than below, default value is setting.
+
+1. Setting the partition for mirror disk
+   - In the case of Linux
+     - /dev/oracleoci/oraclevdb1：no format (RAW)
+     - /dev/oracleoci/oraclevdb2：format ext4
+   - In the case of Windows
+     - D:\ ：no format
+     - E:\ ：format NTFS
+1. Install EXPRESSCLUSTER and register license.
+1. In Config mode of the Cluster WebUI, executing Cluster generation wizard.
+1. setting the Basic Settings and Interconnect.
+   - interconnect1
      - Node1：10.0.0.8
      - Node2：10.0.0.9
-     - MDC：なし
-   - インタコネクト2
+     - MDC：do not use
+   - interconnect2
      - Node1：10.0.10.8
      - Node2：10.0.10.9
      - MDC：mdc1
-1. NP解決を設定する
-   - 種類：Ping
-   - ターゲット：10.0.0.1
-1. フェイルオーバグループを作成する
-1. ミラーディスクリソースを作成する
-  - Linuxの場合
-    - 詳細
-      - ミラーパティションデバイス名：/dev/NMP1
-      - マウントポイント：/mnt/md1
-      - データパーティションデバイス名：/dev/oracleoci/oraclevdb2
-      - クラスタパーティションデバイス名：/dev/oracleoci/oraclevdb1
-      - ファイルシステム：ext4
-  - Windowsの場合	
-    - 詳細
-      - データパーティションのドライブ文字：E:\
-      - クラスタパーティションのドライブ文字：D:\
-      - ミラーディスクコネクト：mdc1
-      - 起動可能サーバ：Node1, Node2
-1. Azure プローブポートリソースを作成する
-   - 詳細
-     - プローブポート：26001
-1. モニタ/監視リソースを作成する
-   - 以下のモニタ/監視リソースはフェイルオーバグループのリソース作成時に自動的に作成される
-   - Linuxの場合
-     - ミラーディスクコネクトモニタリソース
-     - ミラーディスクモニタリソース
-     - Azure プローブポートモニタリソース
-     - Azure ロードバランスモニタリソース
-   - Windowsの場合
-     - ミラーコネクト監視リソース
-     - ミラーディスク監視リソース
-     - Azure プローブポート監視リソース
-     - Azure ロードバランス監視リソース
-1. Cluster WebUI から設定の反映を行う
+1. Setting the NP Resolution
+   - Type：Ping
+   - Ping Target：10.0.0.1
+1. Setting the Failover Group
+1. Setting the mirror disk resource
+  - In the case of Linux
+    - Details
+      - Mirror Partition Device Name：/dev/NMP1
+      - Mount Point：/mnt/md1
+      - Data Partition Device Name：/dev/oracleoci/oraclevdb2
+      - Cluster Partition Device Name：/dev/oracleoci/oraclevdb1
+      - File System：ext4
+  - In the case of Windows	
+    - Details
+      - Date Partition Drive Letter：E:\
+      - Cluster Partition Drive Letter：D:\
+      - Mirror Disk Connect：mdc1
+      - Servers that can run the group：Node1, Node2
+1. Setting Azure probe port resource
+   - Details
+     - Probeport：26001
+1. Setting monitor resources
+   - The following that monitor resource is automatically registered when setting group resouces.
+   - In the case of Linux
+     - mirror disk connect monitor resource
+     - mirror disk monitor resource
+     - Azure probe port monitor resource
+     - Azure load balance monitor resource
+   - In the case of Windows
+     - mirror connect monitor resource
+     - mirror disk monitor resource
+     - Azure probe port monitor resource
+     - Azure load balance monitor resource
+1. In Config mode of the Cluster WebUI, executing Apply the Configuration File.
 
 Check the operation for EXPRESSCLUSTER X
 ---
