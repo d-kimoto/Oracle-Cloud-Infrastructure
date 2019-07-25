@@ -27,7 +27,7 @@ if your environment use private IP address, it becomes possible to communicate f
   - EXPRESSCLUSTER X 4.1 for Windows (internal version：12.11)
 
 ### Cluster configurations
-- network partition resolution resource
+- Network partition resolution resource
   - network partition resolution resource by PING method
 - Group resources
   - mirror disk resource
