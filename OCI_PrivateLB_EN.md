@@ -1,10 +1,10 @@
-Oracle Cloud Infrastructure (using internal load balancer)
+Oracle Cloud Infrastructure (by internal load balancer)
 ===
 
 About this guide
 ---
 This guide describes how to setup EXPRESSCLUSTER of the mirror disk type cluster on Oracle Cloud Infrastructure.  
-The following describes the cluster configuration using a internal load balancer.  
+The following describes the cluster configuration by internal load balancer.  
 For the detailed information of EXPRESSCLUSTER X, please refer to this site.()  
 
 Configuration
@@ -40,50 +40,50 @@ if your environment use private IP address, it becomes possible to communicate f
 
 Oracle Cloud setup
 ---
-1. インスタンスを作成する
-   - 拡張オプションでフォルト・ドメインを分ける
+1. Configure the Instances
+   - Separate the fault domain by Advanced Options
      - Node1
-        - 可用性ドメイン：可用性ドメイン1 (oIJw:AP-TOKYO-1-AD-1) 
-        - フォルト・ドメイン：FAULT-DOMAIN-1
-        - パブリックIPアドレス：10.0.0.8
-        - プライベートIPアドレス：10.0.10.8
+        - availability domain：AD 1 (oIJw:AP-TOKYO-1-AD-1) 
+        - fault domain：FAULT-DOMAIN-1
+        - public IP address：10.0.0.8
+        - private IP address：10.0.10.8
      - Node2
-        - 可用性ドメイン：可用性ドメイン1 (oIJw:AP-TOKYO-1-AD-1)
-        - フォルト・ドメイン：FAULT-DOMAIN-2
-        - パブリックIPアドレス：10.0.0.9
-        - プライベートIPアドレス：10.0.10.9
-1. ブロック・ボリュームを作成する
-   - 2ノード分のブロック・ボリュームを作成
-1. インスタンスにブロック・ボリュームをアタッチする
-   - デバイス・パス(/dev/oracleoci/oraclevdb)を選択する
-   - iSCSIコマンドによりアタッチする
-1. ロード・バランサの作成
-   - 可視性タイプの選択で「プライベート」を選択
-   - バックエンドの追加 をスキップ
-   - ヘルス・チェック・ポリシーの指定
-     - プロトコル：TCP
-     - ポート：26001
-     - 間隔(ミリ秒)：5000
-     - タイムアウト(ミリ秒)：3000
-     - 再試行回数：2
-   - リスナーの設定
-     - トラフィックのタイプ：TCP
-     - リスナーでモニターするポート：80
-1. ロード・バランサへのバックエンド追加
-   - 先の手順で作成したロード・バランサにクラスタノードのIPを指定してバックエンドを追加する
-     - 追加方法：IPアドレス
+        - availability domain：AD 1 (oIJw:AP-TOKYO-1-AD-1)
+        - fault domain：FAULT-DOMAIN-2
+        - public IP address：10.0.0.9
+        - private IP address：10.0.10.9
+1. Configure the Block Volumes
+   - Configure the Block Volumes of 2 nodes
+1. Attach Block Volumes to instance.
+   - Select DEVICE PATH(/dev/oracleoci/oraclevdb).
+   - Attach by iscsi command.
+1. Configure the Load Balancer
+   - Select Private from the "VISIBLTY TYPE"
+   - Skip the "Choose Backends"
+   - Configure the Update Health Check
+     - PROTOCOL：TCP
+     - PORT：26001
+     - INTERNAL IN MS：5000
+     - TIMEOUT IN MS：3000
+     - NUMBUR OF RETRIES：2
+   - Configure the Listener
+     - PROTOCOL：TCP
+     - PORT：80
+1. Add the Backends to Load Balancer
+   - Add the Backends that specifying the cluster node ip address before configure the Load Balancer
+     - Choose how to add backend servers by selecting compute instances or by entering IP addresses.：IP ADDRESSES
      - Node1
-       - IPアドレス：10.0.10.8
-       - ポート：8080
+       - IPAddress：10.0.10.8
+       - Port：8080
      - Node2
-       - IPアドレス：10.0.10.9
-       - ポート：8080
+       - IPAddress：10.0.10.9
+       - Port：8080
 
 Setup EXPRESSCLUSTER X
 ---
 Other parameters than below, default value is setting.
 
-1. Setting the partition for mirror disk
+1. Configure the partition for mirror disk
    - In the case of Linux
      - /dev/oracleoci/oraclevdb1：no format (RAW)
      - /dev/oracleoci/oraclevdb2：format ext4
@@ -92,7 +92,7 @@ Other parameters than below, default value is setting.
      - E:\ ：format NTFS
 1. Install EXPRESSCLUSTER and register license.
 1. In Config mode of the Cluster WebUI, executing Cluster generation wizard.
-1. setting the Basic Settings and Interconnect.
+1. Configure the Basic Settings and Interconnect.
    - interconnect1
      - Node1：10.0.0.8
      - Node2：10.0.0.9
@@ -101,11 +101,11 @@ Other parameters than below, default value is setting.
      - Node1：10.0.10.8
      - Node2：10.0.10.9
      - MDC：mdc1
-1. Setting the NP Resolution
+1. Configure the NP Resolution
    - Type：Ping
    - Ping Target：10.0.0.1
-1. Setting the Failover Group
-1. Setting the mirror disk resource
+1. Configure the Failover Group
+1. Configure the mirror disk resource
   - In the case of Linux
     - Details
       - Mirror Partition Device Name：/dev/NMP1
@@ -119,10 +119,10 @@ Other parameters than below, default value is setting.
       - Cluster Partition Drive Letter：D:\
       - Mirror Disk Connect：mdc1
       - Servers that can run the group：Node1, Node2
-1. Setting Azure probe port resource
+1. Configure Azure probe port resource
    - Details
      - Probeport：26001
-1. Setting monitor resources
+1. Configure monitor resources
    - The following that monitor resource is automatically registered when setting group resouces.
    - In the case of Linux
      - mirror disk connect monitor resource
@@ -138,13 +138,11 @@ Other parameters than below, default value is setting.
 
 Check the operation for EXPRESSCLUSTER X
 ---
-1. Please look up how to check the operation X in the URL below.
+1. Please look up how to check the operation EXPRESSCLUSTER X in the URL below.
 
-★ もしかしてAzure向けのURL(EN)ない？
-
-参考
+Reference
 ---
-- CLUSTERPRO X 4.1 Microsoft Azure 向け HA クラスタ 構築ガイド (Linux 版)
-   - https://jpn.nec.com/clusterpro/clpx/doc/guide/HOWTO_Azure_X41_Linux_JP_01.pdf
-- CLUSTERPRO X 4.1 Microsoft Azure 向け HA クラスタ 構築ガイド (Windows 版)
-   - https://jpn.nec.com/clusterpro/clpx/doc/guide/HOWTO_Azure_X41_Windows_JP_01.pdf
+- EXPRESSCLUSTER X 4.1 HA Cluster Configuration Guide for Microsoft Azure (Linux)
+   - https://www.nec.com/en/global/prod/expresscluster/en/support/setup/HOWTO_Azure_X41_Linux_EN_01.pdf
+- EXPRESSCLUSTER X 4.1 HA Cluster Configuration Guide for Microsoft Azure (Windows)
+   - https://www.nec.com/en/global/prod/expresscluster/en/support/setup/HOWTO_Azure_X41_Windows_EN_01.pdf
