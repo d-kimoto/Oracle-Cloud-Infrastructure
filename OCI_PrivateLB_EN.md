@@ -5,16 +5,16 @@ About this guide
 ---
 This guide describes how to setup EXPRESSCLUSTER of the mirror disk type cluster on Oracle Cloud Infrastructure.  
 The following describes the cluster configuration by internal load balancer.  
-For the detailed information of EXPRESSCLUSTER X, please refer to this site.()  
+For the detailed information of EXPRESSCLUSTER X, please refer to [this site](https://www.nec.com/en/global/prod/expresscluster/index.html).  
 
 Configuration
 ---
 ### Overview
-In the configuration of this guide, create 2-server(Node1 Node2 as below) cluster of mirror disk type.
+In the configuration of this guide, create 2-server(Node1 Node2 as below) cluster of mirror disk type.  
 If a failure has occurred, the data on block storage is taken over to the other server.
-And active and standby servers of the cluster are swiched by controlling the Oracle Cloud Infrastructure load balancer from EXPRESSCLUSTER.
-Client Applications can use public IP address to access instance in the virtual cloud network.
-if your environment use private IP address, it becomes possible to communicate from Node1 to Node2 and this network use data transfer.
+And active and standby servers of the cluster are swiched by controlling the Oracle Cloud Infrastructure load balancer from EXPRESSCLUSTER.  
+Client Applications can use public IP address to access instance in the virtual cloud network.  
+if your environment use private IP address, it becomes possible to communicate from Node1 to Node2 and this network use data transfer.  
 
 ### Software versions
 - In the case of Linux
